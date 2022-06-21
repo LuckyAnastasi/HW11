@@ -59,13 +59,12 @@ Class that is responsible for the logic of adding / removing / editing optional 
 
 class Record:
     # Initialization
-    def __init__(self, name: Name, birthday: Birthday = None, phone=None, other_phone=None) -> None:
-        self.name = name
-        self.birthday = birthday
-        self.other_phone = other_phone
-        self.phones = []
-        if phone:
-            self.phones.append(phone)
+        def __init__(self, name: Name, phone: Phone = None, birthday: Birthday = None) -> None:
+            self.name = name
+            self.birthday = birthday
+            self.phones = []
+            if phone:
+                self.add_phone(phone)
 
     # editing phones
     def edit_phone(self, phone: Phone, other_phone: Phone):
@@ -175,14 +174,13 @@ ab = AddressBook()
 def input_add(*args):
     name = Name(args[0])
     phone = Phone(args[1])
-    other_phone = Phone(args[2])
     try:
         birthday = Birthday(args[2])
     except IndexError:
         birthday = None
-    rec = Record(name=name, phone=[phone], other_phone= =[phone], birthday=birthday) #error
+    rec = Record(name=name, phone=phone, birthday=birthday)
     ab.add_record(rec)
-    return f"Contact {rec.name.value.title()} add in system successful"
+    return f"Contact {rec.name.value.title()} add successful"
 
 
 @input_error
